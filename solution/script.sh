@@ -27,7 +27,7 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update -y
 sudo apt-get install kubectl -y
-sudo kubectl version -o json
+kubectl version -o json
 
 # run cluster
 
