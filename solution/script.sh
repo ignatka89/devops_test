@@ -23,15 +23,15 @@ chmod 755 /usr/local/bin/minikube
 minikube version
 #Install Kubectl
 
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update -y
-sudo apt-get install kubectl -y
-kubectl version -o json
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+kubectl version -o yaml
 
 # run cluster
 
 sudo usermod -aG docker $USER && newgrp docker
 minikube start --driver=docker
-
+minikube addons enable ingress
+minikube dashboard
 
